@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = "inventoware-app:${env.BUILD_NUMBER}"
+        IMAGE_NAME = "inventoware-app:${BUILD_NUMBER}"
     }
     stages {
         stage('Checkout') {
@@ -12,10 +12,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def app = docker.image(env.IMAGE_NAME).build('inventoware-app:2')
-
+                    docker.build("${IMAGE_NAME}")
                 }
-
             }
         }
         stage('Security Scan') {
@@ -32,8 +30,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh 'docker tag ${IMAGE_NAME} $DOCKER_USER/inventoware-app:${env.BUILD_NUMBER}'
-                    sh 'docker push $DOCKER_USER/inventoware-app:${env.BUILD_NUMBER}'
+                    sh 'docker tag ${IMAGE_NAME} $DOCKER_USER/inventoware-app:${BUILD_NUMBER}'
+                    sh 'docker push $DOCKER_USER/inventoware-app:${BUILD_NUMBER}'
                 }
             }
         }
