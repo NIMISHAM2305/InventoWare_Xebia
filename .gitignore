@@ -1,0 +1,27 @@
+# AWS credential files
+.aws/
+*.pem/
+*.env
+
+# Python virtual environment
+venv/
+.venv/
+
+# Terraform files
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+
+# Ansible SSH key
+inventoware_key.pem
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+
+
