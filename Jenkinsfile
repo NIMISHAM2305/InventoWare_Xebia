@@ -12,8 +12,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build(env.IMAGE_NAME)
+                    def app = docker.image(env.IMAGE_NAME).build('.')
                 }
+
             }
         }
         stage('Security Scan') {
