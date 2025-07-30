@@ -12,7 +12,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def app = docker.image(env.IMAGE_NAME).build('.')
+                    def app = docker.image(env.IMAGE_NAME).build('inventoware-app:2')
+
                 }
 
             }
