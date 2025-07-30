@@ -17,6 +17,7 @@ terraform.tfstate.backup
 
 # Ansible SSH key
 inventoware_key.pem
+newkey.pem
 
 # OS files
 .DS_Store
